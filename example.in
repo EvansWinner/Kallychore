@@ -1,0 +1,50 @@
+SHNOTEBOOK.SH --- Mix plain text with shell command output
+
+This is an example of a file that uses 'shnotebook.sh' for processing.
+It is a regular text file with shell commands preceded with hash-mark
+comment characters ("#").  When this file is processed with
+'shnotebook.sh' lines which are normal text should be simply echoed to
+standard output, but lines which are preceded with a comment character
+will be executed and replaced by their output to standard output. For
+example, the next line is a call to 'wc' to list the number of
+characters in this file:
+
+## This comment with double-comment characters will not print in the
+## final result.
+
+# wc -m shnotebook.sh
+
+You can duplicate (annoying, I know) your call in advance, and wrap
+the output in some cute ASCII art, if you think it makes it nicer. Try
+piping a command to sed 's/^/  /' to indent it a couple of spaces if
+you like that:
+
+$ wc -m shnotebook.sh
+,----------
+# wc -m shnotebook.sh | sed 's/^/  /'
+\`--------- 
+
+
+REQUIREMENTS
+
+'shnotebook.sh' requires bash, cat, and sed in your path. That should be
+all.
+
+Use it like this:
+
+  shnotebook.sh file.txt
+
+Use whatever file extension you like for the input file. The results
+will go to standard output, so redirect to a file if you want to save
+it, like --
+
+  shnotebook.sh inputfile.txt > finalresult.txt
+
+Now we will be the envy of all those poor schlubs who are using
+Rmarkdown and all that silly nonsense. Plain text forever!
+
+Notes:
+
+Don't use back-ticks. I don't know why. Just don't. Everything you
+think should just be an easy, quick little hack has to get
+complicated....
