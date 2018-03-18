@@ -7,10 +7,10 @@ comment characters ("#").  When this file is processed with
 standard output, but lines which are preceded with a comment character
 will be executed and replaced by their output to standard output. For
 example, the next line is a call to 'wc' to list the number of
-characters in this file:
+characters in the script file 'shnotebook.sh':
 
 
-881 shnotebook.sh
+310 shnotebook.sh
 
 You can duplicate (annoying, I know) your call in advance, and wrap
 the output in some cute ASCII art, if you think it makes it nicer. Try
@@ -19,14 +19,64 @@ you like that:
 
 $ wc -m shnotebook.sh
 ,----------
-  881 shnotebook.sh
-`--------- 
+  310 shnotebook.sh
+`---------- 
+
+Here are some more examples:
+
+What is the ratio of the size of this file to the size of all the
+files in this directory?
+
+$ echo $(( `wc -m example.in | awk '{print $1}'`/ `wc -m * | awk '{print $1}' | tail -1` ))
+,----------
+  0
+`----------
+
+
+Another example:
+
+First, make data file showing the character counts of all the files in
+this directory:
+
+$ wc -c * | awk '{print }' | head -5 | awk 'BEGIN {i=1}; {print i " " bash; i++}' > data.dat
+
+
+Then, I don't know, plot it, I guess:
+
+$ gnuplot -e "set terminal dumb; plot 'data.dat'"
+                                                                               
+  3500 +-------------------------------------------------------------------+   
+       |        +       A        +       +        +       +        +       |   
+       |                                                'data.dat'    A    |   
+  3000 |-+                                                               +-|   
+       |                                                                   |   
+       |                                                                   |   
+  2500 |-+                                                               +-|   
+       |                                                                   |   
+       |                                                                   |   
+  2000 |-+                                                               +-|   
+       |                                                                   |   
+  1500 |-+                                                               +-|   
+       |                                 A                                 |   
+       |                                                                   |   
+  1000 |-+                                                               +-|   
+       |                                                                   |   
+       |                                                                   |   
+   500 |-+                                                               +-|   
+       |                                                  A                |   
+       |        +       +        +       +        +       +        +       |   
+     0 +-------------------------------------------------------------------+   
+       1       1.5      2       2.5      3       3.5      4       4.5      5   
+                                                                               
 
 
 REQUIREMENTS
 
 'shnotebook.sh' requires bash, cat, and sed in your path. That should be
 all.
+
+
+USE
 
 Use it like this:
 
@@ -41,8 +91,20 @@ it, like --
 Now we will be the envy of all those poor schlubs who are using
 Rmarkdown and all that silly nonsense. Plain text forever!
 
-Notes:
+NOTES
 
-Don't use back-ticks. I don't know why. Just don't. Everything you
-think should just be an easy, quick little hack has to get
-complicated....
+Don't use back-ticks. Or dollar signs. I don't know why. Just
+don't. Or use them, but escape them in your source file. I don't know
+how to escape them in'echo'. Everything you think should just be an
+easy, quick little hack has to get complicated....
+
+You could write the plain text part of your document any way you
+want. You could write it in Markdown, for instance, and pipe it into
+some Markdown processor. Whatever. It's a free country.
+
+Everything gets piped to a single instance of bash, so variables
+should carry over from one "cell" to another; and multi-line things
+should work.
+
+This is a kind of a proof of concept. Tell me what doesn't work and
+I'll think about fixing it.

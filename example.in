@@ -1,50 +1,99 @@
-SHNOTEBOOK.SH --- Mix plain text with shell command output
+KALLYCHORE.SH --- Mix plain text with shell command output
 
-This is an example of a file that uses 'shnotebook.sh' for processing.
-It is a regular text file with shell commands preceded with hash-mark
-comment characters ("#").  When this file is processed with
-'shnotebook.sh' lines which are normal text should be simply echoed to
-standard output, but lines which are preceded with a comment character
-will be executed and replaced by their output to standard output. For
-example, the next line is a call to 'wc' to list the number of
-characters in this file:
+This is an example of a file that uses 'kallychore.sh'[1] for
+processing.  It is a regular text file with shell commands preceded
+with hash-mark comment characters ("#").  When this file is processed
+with 'kallychore.sh' lines which are normal text should be simply
+echoed to standard output, but lines which are preceded with a comment
+character will be executed and replaced by their output to standard
+output. For example, the next line is a call to 'wc' to list the
+number of characters in the script file 'kallychore.sh':
 
-## This comment with double-comment characters will not print in the
-## final result.
+## Note, this comment with double-comment characters will not print in
+## the final result. Also, since you're perusing, note that kallychore
+## is a far shorter file than the files that document it -- at least
+## so far. I have a feeling it might pick up some bloat as time goes
+## by and I discover all the weird edge cases -- especially with shell
+## quoting. Oh, don't get me started.
 
-# wc -m shnotebook.sh
+# wc -m kallychore.sh
 
 You can duplicate (annoying, I know) your call in advance, and wrap
 the output in some cute ASCII art, if you think it makes it nicer. Try
 piping a command to sed 's/^/  /' to indent it a couple of spaces if
 you like that:
 
-$ wc -m shnotebook.sh
+\$ wc -m kallychore.sh
 ,----------
-# wc -m shnotebook.sh | sed 's/^/  /'
-\`--------- 
+# wc -m kallychore.sh | sed 's/^/  /'
+\`---------- 
+
+Here are some more examples:
+
+How many times bigger are all the files in this directory put together
+than this file by itself? (An Earth-shaking question if ever there was
+one.)
+
+\$ echo \$(( \`wc -m example.in | awk '{print \$1}'\` / \`wc -m * | awk '{print \$1}' | tail -1\` ))
+,----------
+# awk 'BEGIN {print `wc -m example.in | awk '{print $1}'` / `wc -m * | awk '{print $1}' | tail -1`}' | sed 's/^/  /'
+\`----------
+
+Another example:
+
+First, make data file showing the character counts of all the files in
+this directory:
+
+\$ wc -c * | awk '{print $1}' | head -5 | awk 'BEGIN {i=1}; {print i " " $0; i++}' > data.dat
+
+# wc -c * | awk '{print $1}' | head -5 | awk 'BEGIN {i=1}; {print i " " $0; i++}' > data.dat
+
+Then, I don't know, plot it, I guess:
+
+\$ gnuplot -e "set terminal dumb; plot 'data.dat'"
+# gnuplot -e "set terminal dumb; plot 'data.dat'"
 
 
 REQUIREMENTS
 
-'shnotebook.sh' requires bash, cat, and sed in your path. That should be
+'kallychore.sh' requires bash, cat, and sed in your path. That should be
 all.
+
+
+USE
 
 Use it like this:
 
-  shnotebook.sh file.txt
+  kallychore.sh file.txt
 
 Use whatever file extension you like for the input file. The results
 will go to standard output, so redirect to a file if you want to save
 it, like --
 
-  shnotebook.sh inputfile.txt > finalresult.txt
+  kallychore.sh inputfile.txt > finalresult.txt
 
 Now we will be the envy of all those poor schlubs who are using
 Rmarkdown and all that silly nonsense. Plain text forever!
 
-Notes:
+NOTES
 
-Don't use back-ticks. I don't know why. Just don't. Everything you
-think should just be an easy, quick little hack has to get
-complicated....
+Don't use back-ticks. Or dollar signs. I don't know why. Just
+don't. Or use them, but escape them in your source file. I don't know
+how to escape them in'echo'. Everything you think should just be an
+easy, quick little hack has to get complicated....
+
+You could write the plain text part of your document any way you
+want. You could write it in Markdown, for instance, and pipe it into
+some Markdown processor. Whatever. It's a free country.
+
+Everything gets piped to a single instance of bash, so variables
+should carry over from one "cell" to another; and multi-line things
+should work.
+
+This is a kind of a proof of concept. Tell me what doesn't work and
+I'll think about fixing it.
+
+FOOTNOTES
+
+[1] Kallychore is an itty-bitty tiny moon of Jupyter.
+    Get it?
