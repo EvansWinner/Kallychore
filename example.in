@@ -1,13 +1,14 @@
 KALLYCHORE.SH --- Mix plain text with shell command output
+==========================================================
 
-This is an example of a file that uses 'kallychore.sh'[1] for
-processing.  It is a regular text file with shell commands preceded
-with hash-mark comment characters ("#").  When this file is processed
-with 'kallychore.sh' lines which are normal text should be simply
-echoed to standard output, but lines which are preceded with a comment
-character will be executed and replaced by their output to standard
-output. For example, the next line is a call to 'wc' to list the
-number of characters in the script file 'kallychore.sh':
+This is an example of a file that uses Kallychore[1] for processing.
+It is a regular text file with shell commands preceded with hash-mark
+comment characters ("#").  When this file is processed with Kallychore
+lines which are normal text should be simply echoed to standard
+output, but lines which are preceded with a comment character will be
+executed and replaced by their output to standard output. For example,
+the next line is a call to 'wc' to list the number of characters in
+the script file 'kallychore':
 
 ## Note, this comment with double-comment characters will not print in
 ## the final result. Also, since you're perusing, note that kallychore
@@ -16,70 +17,159 @@ number of characters in the script file 'kallychore.sh':
 ## by and I discover all the weird edge cases -- especially with shell
 ## quoting. Oh, don't get me started.
 
-# wc -m kallychore.sh
+# wc -m kallychore
 
 You can duplicate (annoying, I know) your call in advance, and wrap
 the output in some cute ASCII art, if you think it makes it nicer. Try
 piping a command to sed 's/^/  /' to indent it a couple of spaces if
 you like that:
 
-\$ wc -m kallychore.sh
-,----------
-# wc -m kallychore.sh | sed 's/^/  /'
-\`---------- 
+{{{
+wc -m kallychore
+}}}
 
-Here are some more examples:
+
+EXAMPLES
+--------
+
+Example 1:
 
 How many times bigger are all the files in this directory put together
 than this file by itself? (An Earth-shaking question if ever there was
 one.)
 
-\$ echo \$(( \`wc -m example.in | awk '{print \$1}'\` / \`wc -m * | awk '{print \$1}' | tail -1\` ))
-,----------
-# awk 'BEGIN {print `wc -m example.in | awk '{print $1}'` / `wc -m * | awk '{print $1}' | tail -1`}' | sed 's/^/  /'
-\`----------
 
-Another example:
+##\$ echo \$(( \`wc -m example.in | awk '{print \$1}'\` / \`wc -m * | awk '{print \$1}' | tail -1\` ))
+
+## awk 'BEGIN {print `wc -m example.in | awk '{print $1}'` / `wc -m * | awk '{print $1}' | tail -1`}' | sed 's/^/  /'
+
+
+Example 2:
 
 First, make data file showing the character counts of all the files in
 this directory:
 
-\$ wc -c * | awk '{print $1}' | head -5 | awk 'BEGIN {i=1}; {print i " " $0; i++}' > data.dat
-
-# wc -c * | awk '{print $1}' | head -5 | awk 'BEGIN {i=1}; {print i " " $0; i++}' > data.dat
+{{{
+wc -c * | awk '{print $1}' | head -5 | awk 'BEGIN {i=1}; {print i " " $0; i++}' > data.dat
+}}}
 
 Then, I don't know, plot it, I guess:
 
-\$ gnuplot -e "set terminal dumb; plot 'data.dat'"
-# gnuplot -e "set terminal dumb; plot 'data.dat'"
+{{{
+gnuplot -e "set terminal dumb; plot 'data.dat'"
+}}}
+
+Example 3:
+
+I am afraid the README.md file included with this git repository may
+be full of too-long words for all your chicken-fried brains. Let me
+fire up an old exercise I once wrote to get a histogram of word
+lengths in a file (Exercise 1-13 from the K%R C book, as it
+happens). Let's just compile the code, and then run it against the
+README:
+
+{{{
+cc -x c -o hist.exe - <<thisisaheredoc
+#include <stdio.h>
+
+#define IN 1
+#define OUT 0
+#define MAX_WORD_LENGTH 20
+
+void make_it(int n) {
+  int i;
+  if (n > 50) n = 50;
+  for (i = 0; i < n; ++i)
+    printf("*");
+  return;
+}
+
+int main() {
+  int c, i, last = OUT, count = 0;
+  int words[MAX_WORD_LENGTH];		/* histogram array */
+  for (i = 0; i < MAX_WORD_LENGTH; ++i)	/* initialize it */
+    words[i] = 0;
+  /* Populate the array */
+  while ((c = getchar()) != EOF) {
+    if ((c == ' ') || (c == '\t') || (c == '\n')) {
+      if (last == IN)
+	if (count <= MAX_WORD_LENGTH) words[count] = ++words[count];
+        else words[MAX_WORD_LENGTH - 1] = ++words[MAX_WORD_LENGTH - 1];
+      count = 0;
+    }
+    else {
+      last = IN;
+      count = ++count;
+    }
+  }
+
+  if (last == IN)
+    if (count <= MAX_WORD_LENGTH) words[count] = ++words[count];
+    else words[MAX_WORD_LENGTH - 1] = ++words[MAX_WORD_LENGTH - 1];
+
+  /* write the histogram */
+  printf("\n    -- NUMBER OF WORDS OF GIVEN LENGTH IN INPUT FILE (MAX 50) --\n");
+  printf("                          |10       |20       |30       |40       |>50\n");
+  for (i = 0; i < MAX_WORD_LENGTH; ++i) {
+    if (i == (MAX_WORD_LENGTH - 1)) printf(">=");
+    else printf("  ");
+    /* if (i < MAX_WORD_LENGTH) printf(" "); */
+    if (i < 9) printf(" ");
+    printf("%d ", i + 1);
+    printf("character");
+    if (i == 0) printf(":  ");
+    else printf("s: ");
+    /* do it */
+    make_it(words[i]);
+    printf("\n");
+  }
+  return 0;
+}
+thisisaheredoc
+cat README.md |./hist.exe
+}}}
 
 
 REQUIREMENTS
+------------
 
-'kallychore.sh' requires bash, cat, and sed in your path. That should be
-all.
+Kallychore requires bash, awk, cat, and sed in your path. That should
+be all. To use Kallychore to build this example file, you would also
+need gnuplot, wc, gcc and --
+
+So, if you're in to this whole "reproducible research" idea then you
+will no doubt want a way to incorporate version numbers of all the
+programs you used. If so, then try 'whatver'[3], which is a tiny
+python 3 script that lets you do this:
+
+{{{
+whatver SYSTEM python wc awk bash gnuplot cat cc whatver tail sed head pic kallychore
+}}}
 
 
 USE
+===
 
 Use it like this:
 
-  kallychore.sh file.txt
+  kallychore file.txt
 
 Use whatever file extension you like for the input file. The results
 will go to standard output, so redirect to a file if you want to save
 it, like --
 
-  kallychore.sh inputfile.txt > finalresult.txt
+  kallychore inputfile > finalresult
 
 Now we will be the envy of all those poor schlubs who are using
 Rmarkdown and all that silly nonsense. Plain text forever!
 
+
 NOTES
+-----
 
 Don't use back-ticks. Or dollar signs. I don't know why. Just
 don't. Or use them, but escape them in your source file. I don't know
-how to escape them in'echo'. Everything you think should just be an
+how to escape them in 'echo'. Everything you think should just be an
 easy, quick little hack has to get complicated....
 
 You could write the plain text part of your document any way you
@@ -93,7 +183,9 @@ should work.
 This is a kind of a proof of concept. Tell me what doesn't work and
 I'll think about fixing it.
 
+
 FOOTNOTES
+---------
 
 [1] Kallychore is an itty-bitty tiny moon of Jupyter.
     Get it?

@@ -1,37 +1,36 @@
-SHNOTEBOOK.SH --- Mix plain text with shell command output
+KALLYCHORE.SH --- Mix plain text with shell command output
 
-This is an example of a file that uses 'shnotebook.sh' for processing.
-It is a regular text file with shell commands preceded with hash-mark
-comment characters ("#").  When this file is processed with
-'shnotebook.sh' lines which are normal text should be simply echoed to
-standard output, but lines which are preceded with a comment character
-will be executed and replaced by their output to standard output. For
-example, the next line is a call to 'wc' to list the number of
-characters in the script file 'shnotebook.sh':
+This is an example of a file that uses 'kallychore.sh'[1] for
+processing.  It is a regular text file with shell commands preceded
+with hash-mark comment characters ("#").  When this file is processed
+with 'kallychore.sh' lines which are normal text should be simply
+echoed to standard output, but lines which are preceded with a comment
+character will be executed and replaced by their output to standard
+output. For example, the next line is a call to 'wc' to list the
+number of characters in the script file 'kallychore.sh':
 
 
-310 shnotebook.sh
+310 kallychore.sh
 
 You can duplicate (annoying, I know) your call in advance, and wrap
 the output in some cute ASCII art, if you think it makes it nicer. Try
 piping a command to sed 's/^/  /' to indent it a couple of spaces if
 you like that:
 
-$ wc -m shnotebook.sh
+$ wc -m kallychore.sh
 ,----------
-  310 shnotebook.sh
+  310 kallychore.sh
 `---------- 
 
 Here are some more examples:
 
-What is the ratio of the size of this file to the size of all the
-files in this directory?
+How many times bigger are all the files in this directory put together
+than this file by itself? (An Earth-shaking question if ever there was
+one.)
 
-$ echo $(( `wc -m example.in | awk '{print $1}'`/ `wc -m * | awk '{print $1}' | tail -1` ))
+$ echo $(( `wc -m example.in | awk '{print $1}'` / `wc -m * | awk '{print $1}' | tail -1` ))
 ,----------
-  0
 `----------
-
 
 Another example:
 
@@ -72,7 +71,7 @@ $ gnuplot -e "set terminal dumb; plot 'data.dat'"
 
 REQUIREMENTS
 
-'shnotebook.sh' requires bash, cat, and sed in your path. That should be
+'kallychore.sh' requires bash, cat, and sed in your path. That should be
 all.
 
 
@@ -80,13 +79,13 @@ USE
 
 Use it like this:
 
-  shnotebook.sh file.txt
+  kallychore.sh file.txt
 
 Use whatever file extension you like for the input file. The results
 will go to standard output, so redirect to a file if you want to save
 it, like --
 
-  shnotebook.sh inputfile.txt > finalresult.txt
+  kallychore.sh inputfile.txt > finalresult.txt
 
 Now we will be the envy of all those poor schlubs who are using
 Rmarkdown and all that silly nonsense. Plain text forever!
@@ -108,3 +107,8 @@ should work.
 
 This is a kind of a proof of concept. Tell me what doesn't work and
 I'll think about fixing it.
+
+FOOTNOTES
+
+[1] Kallychore is an itty-bitty tiny moon of Jupyter.
+    Get it?
