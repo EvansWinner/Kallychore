@@ -12,7 +12,7 @@ all:
 test: clean
 	./kallychore -m README.in > README.md
 	./kallychore extra-tests.in > extra-tests.txt
-
+	rm data.dat his*
 clean:
 	rm -f his* data.dat README.md extra-tests.txt
 

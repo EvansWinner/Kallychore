@@ -87,8 +87,8 @@ Then, I don't know; plot it, I guess:
            |                                                                   |   
            |                                                                   |   
       1000 |-+                                                               +-|   
-           |                                                                   |   
-           |        +       +        +       *        +       +        +       |   
+           |                                 *                                 |   
+           |        +       +        +       +        +       +        +       |   
          0 +-------------------------------------------------------------------+   
            1       1.5      2       2.5      3       3.5      4       4.5      5   
                                                                                    
@@ -249,11 +249,7 @@ don't. Or use them, but escape them in your source file. Or maybe
 don't -- I don't think I've tested it recently. Everything you think
 should just be an easy, quick little hack has to get complicated....
 Maybe you should test it and fix it (if it needs fixing) and, you
-know, all that stuff. I
-
-You could write the plain text part of your document any way you
-want. You could write it in Markdown, for instance, and pipe it into
-some Markdown processor. Whatever. It's a free country.
+know, all that stuff.
 
 Everything gets piped to a single instance of bash, so variables
 should carry over from one "cell" to another; and multi-line things
