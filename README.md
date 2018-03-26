@@ -245,9 +245,11 @@ Rmarkdown and all that silly nonsense. Plain text forever!
 ## Notes
 
 Don't use back-ticks. Or dollar signs. I don't know why. Just
-don't. Or use them, but escape them in your source file. I don't know
-how to escape them in 'echo'. Everything you think should just be an
-easy, quick little hack has to get complicated....
+don't. Or use them, but escape them in your source file. Or maybe
+don't -- I don't think I've tested it recently. Everything you think
+should just be an easy, quick little hack has to get complicated....
+Maybe you should test it and fix it (if it needs fixing) and, you
+know, all that stuff. I
 
 You could write the plain text part of your document any way you
 want. You could write it in Markdown, for instance, and pipe it into
