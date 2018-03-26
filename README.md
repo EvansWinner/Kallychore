@@ -19,21 +19,24 @@ it becomes README.md:
     $ kallychore -b "    " README.in > README.md
 
 It is a regular text file with shell commands surrounded with tripple-
+curly-braces: \{\{\{ and \}\}\} each on a line by itself. Take a look
+at README.in to see how it works. When the input file is processed
 with Kallychore lines which are normal text should be simply echoed to
 standard output, but lines which are surrounded with that tag will be
 echoed in a cute little ASCII art box, and then executed by bash,
 their output going to standard output just like the running text. For
 example, the next line is a call to 'wc' to list the number of
-characters in the script file 'kallychore'.
+characters in the script file 'kallychore'. Well, not quite the next
+line. After the next paragraph wherein I make various disclaimers.
 
 Since this is the README file for Kallychore, we are setting it up for
 postprocessing as a Markdown file, so we're also going to pipe all our
 commands to "sed -e 's/^/ /'". This is to add some spaces to command
-output (not the text of the commands as theys how up in the code cells
--- that is done differently) so that Markdown renders them like code,
-in monospace. This is not necessary if your output target is plain
-text, which is the main purpose of Kallychore, after all. But, er,
-where was I? Oh yeah a basic example --
+output (not the text of the commands themselves -- that's handled
+separately) so that Markdown renders them like code, in
+monospace. This is not necessary if your output target is plain text,
+which is the main purpose of Kallychore, after all. But, er, where was
+I? Oh yeah a basic example --
 
     .--- Code cell start -----------------------------------
      wc -m kallychore | sed -e 's/^/    /' 
@@ -57,35 +60,39 @@ files in this directory.
      wc -c * | awk '{print $1}' | head -5 | awk 'BEGIN {i=1}; {print i " " $0; i++}' > data.dat
     `-------------------------------------------------------
 
-Then, I don't know, plot it, I guess:
+(Note: Since we redirected that to a file, there is no output here.)
+
+Then, I don't know; plot it, I guess:
 
     .--- Code cell start -----------------------------------
      gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'" | sed -e 's/^/    /' 
     `-------------------------------------------------------
                                                                                    
-      12000 +------------------------------------------------------------------+   
-            |       +        +       +        +       +       *        +       |   
-            |                                               'data.dat'    *    |   
-      10000 |-+                                                              +-|   
-            |                                                                  |   
-            |                                                                  |   
-            |                                                                  |   
-       8000 |-+                                                              +-|   
-            |                                                                  |   
-            |                                                                  |   
-       6000 |-+                                                              +-|   
-            |                                                                  |   
-            |                                                                  |   
-       4000 |-+                                                              +-|   
-            |                                                                  |   
-            |                *                                                 |   
-            |                                                                  |   
-       2000 |-+                                                              +-|   
-            |                                                                  |   
-            |       +        +       +        +       +       +        +       |   
-          0 +------------------------------------------------------------------+   
-            1      1.5       2      2.5       3      3.5      4       4.5      5   
+      7000 +-------------------------------------------------------------------+   
+           |        +       +        +       +        +       +        +       |   
+           |                                                'd*ta.dat'    *    |   
+      6000 |-+                                                               +-|   
+           |                                                                   |   
+           |                                                                   |   
+      5000 |-+                                                               +-|   
+           |                                                                   |   
+           |                                                                   |   
+      4000 |-+                                                               +-|   
+           |                                                                   |   
+      3000 |-+                                                               +-|   
+           |                *                                                  |   
+           |                                                                   |   
+      2000 |-+                                                               +-|   
+           |                                                                   |   
+           |                                                                   |   
+      1000 |-+                                                               +-|   
+           |                                                                   |   
+           |        +       +        +       *        +       +        +       |   
+         0 +-------------------------------------------------------------------+   
+           1       1.5      2       2.5      3       3.5      4       4.5      5   
                                                                                    
+
+Neet.
 
 
 ### Example 2
@@ -155,7 +162,7 @@ extra-tests.in:
        return 0;
      }
      thisHereIsAHereDoc
-     cat extra-tests.in |./hist.exe | sed -e 's/^/    /' 
+     cat extra-tests.in | ./hist.exe | sed -e 's/^/    /' 
     `-------------------------------------------------------
     
         -- NUMBER OF WORDS OF GIVEN LENGTH IN INPUT FILE (MAX 50) --
