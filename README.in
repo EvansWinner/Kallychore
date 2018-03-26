@@ -152,7 +152,8 @@ gnuplot, wc, gcc, sed, and --
 
 So, if you're in to this whole "reproducible research" idea then you
 will no doubt want a way to incorporate version numbers of all the
-programs you used. If so, then try 'whatver'[3], which is a tiny
+programs you used. If so, then try
+[whatver](https://github.com/EvansWinner/whatver), which is a tiny
 python 3 script that lets you do this:
 
 {{{
