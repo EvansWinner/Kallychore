@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Kallychore is like Rmarkdown in Rstudio, or Jypyter, only really
+Kallychore is like Rmarkdown in Rstudio, or Jupyter, only really
 dumb. Or, in any case, it is a bash shell script (mainly consisting of
 an embedded awk program) which turns plain text mixed with shell
 commands into plain text mixed with shell commands AND their
@@ -16,18 +16,19 @@ post-process it with something like Pandoc.
 This file's source is README.in. Once it is processed with Kallychore,
 it becomes README.md:
 
-    $ kallychore -b "    " README.in > README.md
+    $ kallychore -m README.in > README.md
 
-It is a regular text file with shell commands surrounded with tripple-
-curly-braces: \{\{\{ and \}\}\} each on a line by itself. Take a look
-at README.in to see how it works. When the input file is processed
-with Kallychore lines which are normal text should be simply echoed to
-standard output, but lines which are surrounded with that tag will be
-echoed in a cute little ASCII art box, and then executed by bash,
-their output going to standard output just like the running text. For
-example, the next line is a call to 'wc' to list the number of
-characters in the script file 'kallychore'. Well, not quite the next
-line. After the next paragraph wherein I make various disclaimers.
+It is a regular text file with shell commands surrounded with
+tripple-curly-braces: \{\{\{ and \}\}\} each on a line by itself. Take
+a look at README.in to see how it works. When the input file is
+processed with Kallychore, lines which are normal text should be
+simply echoed to standard output, but lines which are surrounded with
+that tag will be echoed in a cute little ASCII art box, and then
+executed by bash, their output going to standard output just like the
+running text. For example, the next line is a call to 'wc' to list the
+number of characters in the script file 'kallychore'. Well, not quite
+the next line. After the next paragraph wherein I make various
+disclaimers.
 
 Since this is the README file for Kallychore, we are setting it up for
 postprocessing as a Markdown file, so we're also going to pipe all our

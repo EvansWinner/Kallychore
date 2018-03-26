@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Kallychore is like Rmarkdown in Rstudio, or Jypyter, only really
+Kallychore is like Rmarkdown in Rstudio, or Jupyter, only really
 dumb. Or, in any case, it is a bash shell script (mainly consisting of
 an embedded awk program) which turns plain text mixed with shell
 commands into plain text mixed with shell commands AND their
@@ -16,18 +16,19 @@ post-process it with something like Pandoc.
 This file's source is README.in. Once it is processed with Kallychore,
 it becomes README.md:
 
-    $ kallychore -b "    " README.in > README.md
+    $ kallychore -m README.in > README.md
 
-It is a regular text file with shell commands surrounded with tripple-
-curly-braces: \{\{\{ and \}\}\} each on a line by itself. Take a look
-at README.in to see how it works. When the input file is processed
-with Kallychore lines which are normal text should be simply echoed to
-standard output, but lines which are surrounded with that tag will be
-echoed in a cute little ASCII art box, and then executed by bash,
-their output going to standard output just like the running text. For
-example, the next line is a call to 'wc' to list the number of
-characters in the script file 'kallychore'. Well, not quite the next
-line. After the next paragraph wherein I make various disclaimers.
+It is a regular text file with shell commands surrounded with
+tripple-curly-braces: \{\{\{ and \}\}\} each on a line by itself. Take
+a look at README.in to see how it works. When the input file is
+processed with Kallychore, lines which are normal text should be
+simply echoed to standard output, but lines which are surrounded with
+that tag will be echoed in a cute little ASCII art box, and then
+executed by bash, their output going to standard output just like the
+running text. For example, the next line is a call to 'wc' to list the
+number of characters in the script file 'kallychore'. Well, not quite
+the next line. After the next paragraph wherein I make various
+disclaimers.
 
 Since this is the README file for Kallychore, we are setting it up for
 postprocessing as a Markdown file, so we're also going to pipe all our
@@ -38,10 +39,10 @@ monospace. This is not necessary if your output target is plain text,
 which is the main purpose of Kallychore, after all. But, er, where was
 I? Oh yeah a basic example --
 
-    .--- Code cell start -----------------------------------
+
      wc -m kallychore | sed -e 's/^/    /' 
-    `-------------------------------------------------------
-    2924 kallychore
+
+    2803 kallychore
 
 
 ## Examples
@@ -56,17 +57,17 @@ one.)
 First, lets make a data file showing the character counts of all the
 files in this directory.
 
-    .--- Code cell start -----------------------------------
+
      wc -c * | awk '{print $1}' | head -5 | awk 'BEGIN {i=1}; {print i " " $0; i++}' > data.dat
-    `-------------------------------------------------------
+
 
 (Note: Since we redirected that to a file, there is no output here.)
 
 Then, I don't know; plot it, I guess:
 
-    .--- Code cell start -----------------------------------
+
      gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'" | sed -e 's/^/    /' 
-    `-------------------------------------------------------
+
                                                                                    
       7000 +-------------------------------------------------------------------+   
            |        +       +        +       +        +       +        +       |   
@@ -104,7 +105,7 @@ of word lengths in a file (Exercise 1-13 from ye olde K&R C book, as
 it happens). Let's just compile the code, and then run it against
 extra-tests.in:
 
-    .--- Code cell start -----------------------------------
+
      cc -x c -o hist.exe - <<'thisHereIsAHereDoc'
      #include <stdio.h>
      
@@ -163,7 +164,7 @@ extra-tests.in:
      }
      thisHereIsAHereDoc
      cat extra-tests.in | ./hist.exe | sed -e 's/^/    /' 
-    `-------------------------------------------------------
+
     
         -- NUMBER OF WORDS OF GIVEN LENGTH IN INPUT FILE (MAX 50) --
                               |10       |20       |30       |40       |>50
@@ -202,10 +203,10 @@ will no doubt want a way to incorporate version numbers of all the
 programs you used. If so, then try 'whatver'[3], which is a tiny
 python 3 script that lets you do this:
 
-    .--- Code cell start -----------------------------------
+
      whatver SYSTEM python wc awk bash gnuplot cat cc whatver \
              tail sed head pic perl graph-easy kallychore  | sed -e 's/^/    /' 
-    `-------------------------------------------------------
+
      - CYGWIN_NT-10.0 2.10.0(0.325/5/3) 2018-02-02 15:16 x86_64 unknown unknown Cygwin
      - Python 2.7.14
      - wc (GNU coreutils) 8.26
