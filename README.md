@@ -48,6 +48,9 @@ I? Oh yeah a basic example --
 ## Examples
 --------
 
+[This](https://www.linkedin.com/pulse/group-long-hand-written-numbers-smaller-sub-units-better-evans-winner/)
+article in LinkedIn, silly as it may be, was done with Kallychore.
+
 ### Example 1
 
 How many times bigger are all the files in this directory put together
@@ -208,22 +211,22 @@ python 3 script that lets you do this:
      whatver SYSTEM python wc awk bash gnuplot cat cc whatver \
              tail sed head pic perl graph-easy kallychore  | sed -e 's/^/    /' 
 
-     - CYGWIN_NT-10.0 2.10.0(0.325/5/3) 2018-02-02 15:16 x86_64 unknown unknown Cygwin
-     - Python 2.7.14
-     - wc (GNU coreutils) 8.26
-     - GNU Awk 4.2.1, API: 2.0 (GNU MPFR 4.0.1, GNU MP 6.1.2)
-     - GNU bash, version 4.4.12(3)-release (x86_64-unknown-cygwin)
-     - gnuplot 5.2 patchlevel 2
-     - cat (GNU coreutils) 8.26
-     - cc (GCC) 6.4.0
-     - whatver 1
-     - tail (GNU coreutils) 8.26
-     - sed (GNU sed) 4.4
-     - head (GNU coreutils) 8.26
-     - GNU pic (groff) version 1.22.3
-     - perl 5, version 26, subversion 1 (v5.26.1) built for x86_64-cygwin-threads-multi
-     - Graph::Easy v0.69  (c) by Tels 2004-2008.  Released under the GPL 2.0 or later.
-     - kallychore 1
+    CYGWIN_NT-10.0 2.10.0(0.325/5/3) 2018-02-02 15:16 x86_64 unknown unknown Cygwin
+    Python 2.7.14
+    wc (GNU coreutils) 8.26
+    GNU Awk 4.2.1, API: 2.0 (GNU MPFR 4.0.1, GNU MP 6.1.2)
+    GNU bash, version 4.4.12(3)-release (x86_64-unknown-cygwin)
+    gnuplot 5.2 patchlevel 2
+    cat (GNU coreutils) 8.26
+    cc (GCC) 6.4.0
+    whatver 1
+    tail (GNU coreutils) 8.26
+    sed (GNU sed) 4.4
+    head (GNU coreutils) 8.26
+    GNU pic (groff) version 1.22.3
+    perl 5, version 26, subversion 1 (v5.26.1) built for x86_64-cygwin-threads-multi
+    Graph::Easy v0.69  (c) by Tels 2004-2008.  Released under the GPL 2.0 or later.
+    kallychore 1
 
 
 ## Use

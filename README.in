@@ -47,6 +47,9 @@ wc -m kallychore | sed -e 's/^/    /'
 ## Examples
 --------
 
+[This](https://www.linkedin.com/pulse/group-long-hand-written-numbers-smaller-sub-units-better-evans-winner/)
+article in LinkedIn, silly as it may be, was done with Kallychore.
+
 ### Example 1
 
 How many times bigger are all the files in this directory put together
