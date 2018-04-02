@@ -65,6 +65,9 @@ BEGIN {
     textendstr = "kallychoreistehbombzers" 	       # heredoc end
     code = 0;
     text = 0;
+    print "function spaces {"
+    print " sed 's/^/    /g'"
+    print "}"
 }
 
 /^{{{/ {
