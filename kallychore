@@ -38,8 +38,8 @@ while getopts vhma:b:c: opt; do
 	    cellendstr="${OPTARG}"
 	    ;;
 	m)
-	    cellstartstr=""
-	    cellendstr=""
+	    cellstartstr="    .--- Code cell start ----------"
+	    cellendstr="    \`------------------------------"
 	    cellprefix="     "
 	    ;;
 	h)
