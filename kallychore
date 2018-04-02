@@ -4,7 +4,7 @@ kallyc_version=1
 
 ## Defaults
 cellstartstr=".--- Code cell start ----------"
-cellendstr="\`--------------------------------"
+cellendstr="\`------------------------------"
 cellprefix=":  "
 
 function kallyc_help() {
