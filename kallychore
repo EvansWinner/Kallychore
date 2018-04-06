@@ -19,7 +19,7 @@ function kallyc_help() {
     echo " -b \"STRING\"    Prefix line with STRING before each line of code in a code cell."       
     echo "                Default is for use with plain text."
     echo " -c \"STRING\"    Insert line with STRING after code in a code cell."
-    echo " -m             Set -a, -b, and -c for postprocessing with Markdown."
+    echo " -m             Set -a, -b, and -c for postprocessing with Pandoc's Markdown."
 }
 
 if [ "$1" = "" ]; then
@@ -38,9 +38,9 @@ while getopts vhma:b:c: opt; do
 	    cellendstr="${OPTARG}"
 	    ;;
 	m)
-	    cellstartstr="    .--- Code cell start ----------"
-	    cellendstr="    \`------------------------------"
-	    cellprefix="     "
+	    cellstartstr="\`\`\`bash"
+	    cellendstr="\`\`\`"
+	    cellprefix=""
 	    ;;
 	h)
 	    kallyc_help 
@@ -134,8 +134,8 @@ EOF
 for arg; do
     cat $arg |
 	awk -v cellstartstr="${cellstartstr}" \
-	    -v cellendstr="${cellendstr}" -v \
-	    cellprefix="${cellprefix}" "$script"  |
+	    -v cellendstr="${cellendstr}"     \
+	    -v cellprefix="${cellprefix}" "$script"  |
 	bash
 done
 
