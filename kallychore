@@ -38,8 +38,8 @@ while getopts vhma:b:c: opt; do
 	    cellendstr="${OPTARG}"
 	    ;;
 	m)
-	    cellstartstr="\`\`\`bash"
-	    cellendstr="\`\`\`"
+	    cellstartstr="\`\`\`bash\n#---- Code Cell Start ----------"
+	    cellendstr="#-------------------------------\n\`\`\`"
 	    cellprefix=""
 	    ;;
 	h)
