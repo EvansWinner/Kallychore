@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
-kallyc_version=2
+version=2
 
-## Defaults
+### Defaults
+## Delimiting strings cfor code cells and output regions.
 cellstartstr=".--- Code cell start ----------"
 cellendstr="\`------------------------------"
 cellprefix=":  "
+outputstartstr=""
+outputendstr=""
 
+## Help
 function kallyc_help() {
     echo "Usage:"
     echo "    kallychore [opts] FILE [FILE...]  Process FILE(s) with Kallychore."
@@ -19,14 +23,18 @@ function kallyc_help() {
     echo " -b \"STRING\"    Prefix line with STRING before each line of code in a code cell."       
     echo "                Default is for use with plain text."
     echo " -c \"STRING\"    Insert line with STRING after code in a code cell."
-    echo " -m             Set -a, -b, and -c for postprocessing with Pandoc's Markdown."
+    echo " -d \"STRING\"    Insert line with STRING before output from a code cell."
+    echo " -d \"STRING\"    Insert line with STRING after output from a code cell."
+    echo " -m             Set -a, -b, -c, -d and -e for postprocessing with Pandoc."
 }
 
+## If nothing on command line, then bail out
 if [ "$1" = "" ]; then
     kallyc_help && exit
 fi
 
-while getopts vhma:b:c: opt; do
+## Parse command line
+while getopts vhma:b:c:d:e: opt; do
     case ${opt} in
 	a)
 	    cellstartstr="${OPTARG}"
@@ -37,17 +45,25 @@ while getopts vhma:b:c: opt; do
 	c)
 	    cellendstr="${OPTARG}"
 	    ;;
+	d)
+	    outputstartstr="${OPTARG}"
+	    ;;
+	e)
+	    outputendstr="${OPTARG}"
+	    ;;
 	m)
 	    cellstartstr="\`\`\`bash\n#---- Code Cell Start ----------"
 	    cellendstr="#-------------------------------\n\`\`\`"
 	    cellprefix=""
+	    outputstartstr="~~~~~"
+	    outputendstr="~~~~~"
 	    ;;
 	h)
 	    kallyc_help 
 	    exit 0
 	    ;;
 	v)
-	    echo "kallychore $kallyc_version" >&2
+	    echo "kallychore $version" >&2
 	    exit 0
 	    ;;
 	\?) 
@@ -97,10 +113,12 @@ BEGIN {
     print cellendstr;
     print textendstr;
     # print all the output
+    print outputstartstr;
     for (i=1;i<code;i++) {
 	print a[i];
     }
-    
+    print outputendstr;
+
     code = 0;			# reset for next cell
     text = 0;
     delete a;			# clear the array
@@ -138,4 +156,3 @@ for arg; do
 	    -v cellprefix="${cellprefix}" "$script"  |
 	bash
 done
-
