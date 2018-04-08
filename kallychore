@@ -2,7 +2,7 @@
 
 ## This is updated automatically by git pre-commit hook to be the
 ## current git revision number.
-version="22"
+version="23"
 
 ### Defaults
 ## Delimiting strings cfor code cells and output regions.
@@ -65,7 +65,7 @@ while getopts vhma:b:c:d:e: opt; do
 	    exit 0
 	    ;;
 	v)
-	    echo "kallychore $version" >&2
+	    echo "kallychore version (git revision) $version" >&2
 	    exit 0
 	    ;;
 	\?) 
