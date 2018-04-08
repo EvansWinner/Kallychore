@@ -40,7 +40,7 @@ wc -m kallychore
 ###############################
 ```
 ~~~~~
-3844 kallychore
+3871 kallychore
 ~~~~~
 
 
@@ -79,26 +79,26 @@ gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'"
 ~~~~~
                                                                                
                                                                                
-  7000 +-+------+-------+--------+-------+--------+-------+--------+-----+-+   
-       +        +       +        +       +        +       +        +       *   
-       |                                                'data.dat'    *    |   
-  6000 +-+                                                               +-+   
+  4000 +-+------+-------+--------+-------+--------+-------+--------+-----+-+   
+       +        +       +        +       +        +       *        +       +   
+  3500 +-+                                              'data.dat'    *  +-+   
        |                                                                   |   
-  5000 +-+                                                               +-+   
-       |                                                                   |   
-       |                                                                   |   
-  4000 +-+                                                               +-+   
-       |                                 *                                 |   
        |                                                                   |   
   3000 +-+                                                               +-+   
        |                                                                   |   
+  2500 +-+                                                               +-+   
        |                                                                   |   
   2000 +-+                                                               +-+   
        |                                                                   |   
+       |                                                                   |   
+  1500 +-+                                                               +-+   
+       |                                                                   |   
   1000 +-+                                                               +-+   
-       |                                                  *                |   
-       *        +       *        +       +        +       +        +       +   
-     0 +-+------+-------+--------+-------+--------+-------+--------+-----+-+   
+       |                                                                   |   
+       |                                                                   *   
+   500 +-+                               *                               +-+   
+       +        +       *        +       +        +       +        +       +   
+     0 *-+------+-------+--------+-------+--------+-------+--------+-----+-+   
        1       1.5      2       2.5      3       3.5      4       4.5      5   
                                                                                
 ~~~~~
@@ -236,7 +236,7 @@ whatver version (git revision) 19
 tail (GNU coreutils) 8.26
 sed (GNU sed) 4.4
 head (GNU coreutils) 8.26
-kallychore version (git revision) 23
+kallychore version (git revision) 26
 ~~~~~
 
 ```bash
@@ -246,7 +246,8 @@ make_recipe README.md
 ```
 ~~~~~
 The Makefile command line was:
-make[1]: 'README.md' is up to date.
+./kallychore -m README.kc > README.md
+rm data.dat his*
 ~~~~~
 
 
