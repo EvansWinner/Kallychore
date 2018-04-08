@@ -9,7 +9,7 @@ cellendstr="\`------------------------------"
 cellprefix=":  "
 outputstartstr=""
 outputendstr=""
-
+ 
 ## Help
 function kallyc_help() {
     echo "Usage:"
