@@ -2,7 +2,7 @@
 
 ## This is updated automatically by git pre-commit hook to be the
 ## current git revision number.
-version="26"
+version="27"
 
 ### Defaults
 ## Delimiting strings cfor code cells and output regions.
@@ -86,7 +86,7 @@ BEGIN {
     # Functions we want available to the user
     print "function make_recipe {"
     print "echo The Makefile command line was:"
-    print " make --just-print --no-print-directory $1"
+    print " make -B --just-print --no-print-directory $1"
     print "}"
     print "function spaces {"
     print " sed 's/^/    /g'"
@@ -120,11 +120,11 @@ BEGIN {
     print cellendstr;
     print textendstr;
     # print all the output
-    print outputstartstr;
+    if (1 in a) print outputstartstr;
     for (i=1;i<code;i++) {
 	print a[i];
     }
-    print outputendstr;
+    if (1 in a) print outputendstr;
 
     code = 0;			# reset for next cell
     text = 0;
