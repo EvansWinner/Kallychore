@@ -2,45 +2,40 @@
 
 ## Introduction
 
-Kallychore is like Rmarkdown in Rstudio, or Jupyter, only really
-dumb. Or, in any case, it is a bash shell script (mainly consisting of
-an embedded awk program) which turns plain text mixed with shell
-commands into plain text mixed with shell commands AND their
-output. Cool, no?
+Kallychore is an "active code" processor for plain text and `bash`,
+sort of like like Rmarkdown in Rstudio for Markdown and R code, or
+`org-mode` with `org-babel`. It's point is to scratch its author's
+itch to have something like Rmarkdown for the `bash` command line
+which will allow for something like the "reproducable research" style
+of creating documents. In any case, it is a bash shell script (mainly
+consisting of an embedded awk program) which turns plain text mixed
+with shell commands into plain text mixed with shell commands AND
+their output. Cool, no?
 
-This is an example of a file that uses Kallychore[1] for
+This is an example of a file that uses Kallychore for
 processing. Although Kallychore is intended for plain text use, there
 is nothing to say you can't write your plain text in Markdown and then
-post-process it with something like Pandoc.
+post-process it with something like Pandoc. In fact, Kallychore has a
+command line flag, "-m", which produces output better suited for use
+in Github's Markdown or Pandoc's "backtick_code_blocks" extension.
 
-This file's source is README.in. Once it is processed with Kallychore,
+This file's source is README.kc. Once it is processed with Kallychore,
 it becomes README.md:
 
-    $ kallychore -m README.in > README.md
+    $ kallychore -m README.kc > README.md
 
 It is a regular text file with shell commands surrounded with
 tripple-curly-braces: \{\{\{ and \}\}\} each on a line by itself. Take
-a look at README.in to see how it works. When the input file is
+a look at README.kc to see how it works. When the input file is
 processed with Kallychore, lines which are normal text should be
 simply echoed to standard output, but lines which are surrounded with
 that tag will be echoed in a cute little ASCII art box, and then
 executed by bash, their output going to standard output just like the
 running text. For example, the next line is a call to 'wc' to list the
-number of characters in the script file 'kallychore'. Well, not quite
-the next line. After the next paragraph wherein I make various
-disclaimers.
-
-Since this is the README file for Kallychore, we are setting it up for
-postprocessing as a Markdown file, so we're also going to pipe all our
-commands to "sed -e 's/^/ /'". This is to add some spaces to command
-output (not the text of the commands themselves -- that's handled
-separately) so that Markdown renders them like code, in
-monospace. This is not necessary if your output target is plain text,
-which is the main purpose of Kallychore, after all. But, er, where was
-I? Oh yeah a basic example --
+number of characters in the script file 'kallychore'. 
 
 {{{
-wc -m kallychore | sed -e 's/^/    /' 
+wc -m kallychore
 }}}
 
 
@@ -68,7 +63,7 @@ wc -c * | awk '{print $1}' | head -5 | awk 'BEGIN {i=1}; {print i " " $0; i++}' 
 Then, I don't know; plot it, I guess:
 
 {{{
-gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'" | sed -e 's/^/    /' 
+gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'"
 }}}
 
 Neet.
@@ -76,13 +71,13 @@ Neet.
 
 ### Example 2
 
-I am afraid the extra-tests.in file included with this git repository
+I am afraid the extra-tests.kc file included with this git repository
 may be full of words that are too long for all your chicken-fried
 brains. Let me fire up an old exercise I once wrote to get a histogram
 of word lengths in a file (Exercise 1-13 from ye olde K&R C book, as
 it happens). Let's just compile the code, and then run it against
-extra-tests.in:
-
+extra-tests.kc:
+ 
 {{{
 cc -x c -o hist.exe - <<'thisHereIsAHereDoc'
 #include <stdio.h>
@@ -141,7 +136,7 @@ int main() {
   return 0;
 }
 thisHereIsAHereDoc
-cat extra-tests.in | ./hist.exe | sed -e 's/^/    /' 
+cat extra-tests.kc | ./hist.exe
 }}}
 
 No, doesn't look too bad after all. I think you'll all survive.
@@ -161,9 +156,12 @@ python 3 script that lets you do this:
 
 {{{
 whatver SYSTEM python wc awk bash gnuplot cat cc whatver \
-        tail sed head pic perl graph-easy kallychore  | sed -e 's/^/    /' 
+        tail sed head pic perl kallychore
 }}}
 
+{{{
+make_recipe README.md
+}}}
 
 ## Use
 

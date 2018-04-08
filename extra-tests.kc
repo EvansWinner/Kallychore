@@ -1,0 +1,11 @@
+{{{
+echo "Hi. This is a test."
+}}}
+
+~README.in~ is the main test file for Kallychore, but I want to be
+able to test a few more things. The file starts and ends with a code
+cell.
+
+{{{
+echo "Ta-da!"
+}}}

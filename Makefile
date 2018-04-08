@@ -9,10 +9,18 @@ all:
 	@echo ""
 	@echo "That's about it, really."
 
-test: clean
-	./kallychore -m README.in > README.md
-	./kallychore extra-tests.in > extra-tests.txt
+
+
+test: clean extra-tests.txt README.md
+
+
+README.md: README.kc
+	./kallychore -m README.kc > README.md
 	rm data.dat his*
+
+extra-tests.txt: extra-tests.kc
+	./kallychore extra-tests.kc > extra-tests.txt
+
 clean:
 	rm -f his* data.dat README.md extra-tests.txt
 
