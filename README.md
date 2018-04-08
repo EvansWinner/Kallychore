@@ -80,8 +80,8 @@ gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'"
                                                                                
                                                                                
   7000 +-+------+-------+--------+-------+--------+-------+--------+-----+-+   
-       +        +       +        +       +        +       +        +       +   
-       |                                                'data.dat'    *    *   
+       +        +       +        +       +        +       +        +       *   
+       |                                                'data.dat'    *    |   
   6000 +-+                                                               +-+   
        |                                                                   |   
   5000 +-+                                                               +-+   
@@ -220,13 +220,12 @@ python 3 script that lets you do this:
 
 ```bash
 #### Code Cell Start ##########
-whatver SYSTEM python wc awk bash gnuplot cat cc whatver \
-        tail sed head pic perl kallychore
+whatver SYSTEM wc awk bash gnuplot cat cc whatver \
+        tail sed head kallychore 
 ###############################
 ```
 ~~~~~
 Linux 4.13.0-37-generic #42-Ubuntu SMP Wed Mar 7 14:13:23 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
-Python 2.7.14
 wc (GNU coreutils) 8.26
 GNU Awk 4.1.4, API: 1.1 (GNU MPFR 3.1.6, GNU MP 6.1.2)
 GNU bash, version 4.4.12(1)-release (x86_64-pc-linux-gnu)
@@ -237,8 +236,6 @@ whatver version (git revision) 19
 tail (GNU coreutils) 8.26
 sed (GNU sed) 4.4
 head (GNU coreutils) 8.26
-GNU pic (groff) version 1.22.3
-perl 5, version 26, subversion 0 (v5.26.0) built for x86_64-linux-gnu-thread-multi
 kallychore version (git revision) 23
 ~~~~~
 
@@ -251,6 +248,18 @@ make_recipe README.md
 The Makefile command line was:
 make[1]: 'README.md' is up to date.
 ~~~~~
+
+
+## Emacs
+
+There are no comment characters in Kallychore documents, so whatever
+you write will show up. That means you can't use a magic mode line at
+the top. Instead, try giving your input files a unique extension and
+then use ~auto-mode-alist~. If anyone can suggest a nice recipe for
+using mutilple major modes for editing Kallychore files (text mode or
+markdown mode for text regions, and shell-script-mode for code cells)
+that would be... swell.
+
 
 ## Use
 

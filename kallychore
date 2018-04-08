@@ -2,7 +2,7 @@
 
 ## This is updated automatically by git pre-commit hook to be the
 ## current git revision number.
-version="25"
+version="26"
 
 ### Defaults
 ## Delimiting strings cfor code cells and output regions.
