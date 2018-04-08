@@ -2,7 +2,7 @@
 
 ## This is updated automatically by git pre-commit hook to be the
 ## current git revision number.
-version="23"
+version="24"
 
 ### Defaults
 ## Delimiting strings cfor code cells and output regions.
@@ -54,11 +54,11 @@ while getopts vhma:b:c:d:e: opt; do
 	    outputendstr="${OPTARG}"
 	    ;;
 	m)
-	    cellstartstr="\`\`\`bash\n---- Code Cell Start ----------"
-	    cellendstr="-------------------------------\n\`\`\`"
+	    cellstartstr="\`\`\`bash\n#### Code Cell Start ##########"
+	    cellendstr="###############################\n\`\`\`"
 	    cellprefix=""
-	    outputstartstr="~~~~~"
-	    outputendstr="~~~~~"
+	    outputstartstr="echo ~~~~~"
+	    outputendstr="echo ~~~~~"
 	    ;;
 	h)
 	    kallyc_help 
@@ -160,6 +160,8 @@ for arg; do
     cat $arg |
 	awk -v cellstartstr="${cellstartstr}" \
 	    -v cellendstr="${cellendstr}"     \
+	    -v outputstartstr="${outputstartstr}"     \
+	    -v outputendstr="${outputendstr}"     \
 	    -v cellprefix="${cellprefix}" "$script"  |
 	bash
 done
