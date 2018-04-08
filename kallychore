@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-version="20"
+## This is updated automatically by git pre-commit hook to be the
+## current git revision number.
+version="21"
 
 ### Defaults
 ## Delimiting strings cfor code cells and output regions.
