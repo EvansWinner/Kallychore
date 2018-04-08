@@ -40,7 +40,7 @@ wc -m kallychore
 ###############################
 ```
 ~~~~~
-3871 kallychore
+3847 kallychore
 ~~~~~
 
 
@@ -79,26 +79,26 @@ gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'"
 ~~~~~
                                                                                
                                                                                
-  4000 +-+------+-------+--------+-------+--------+-------+--------+-----+-+   
-       +        +       +        +       +        +       *        +       +   
-  3500 +-+                                              'data.dat'    *  +-+   
+  7000 +-+------+-------+--------+-------+--------+-------+--------+-----+-+   
+       +        +       +        +       +        +       +        +       *   
+       |                                                'data.dat'    *    |   
+  6000 +-+                                                               +-+   
        |                                                                   |   
+  5000 +-+                                                               +-+   
+       |                                                                   |   
+       |                                                                   |   
+  4000 +-+                                                               +-+   
+       |                                 *                                 |   
        |                                                                   |   
   3000 +-+                                                               +-+   
        |                                                                   |   
-  2500 +-+                                                               +-+   
        |                                                                   |   
   2000 +-+                                                               +-+   
        |                                                                   |   
-       |                                                                   |   
-  1500 +-+                                                               +-+   
-       |                                                                   |   
   1000 +-+                                                               +-+   
-       |                                                                   |   
-       |                                                                   *   
-   500 +-+                               *                               +-+   
-       +        +       *        +       +        +       +        +       +   
-     0 *-+------+-------+--------+-------+--------+-------+--------+-----+-+   
+       |                                                  *                |   
+       *        +       *        +       +        +       +        +       +   
+     0 +-+------+-------+--------+-------+--------+-------+--------+-----+-+   
        1       1.5      2       2.5      3       3.5      4       4.5      5   
                                                                                
 ~~~~~
@@ -256,7 +256,7 @@ rm data.dat his*
 There are no comment characters in Kallychore documents, so whatever
 you write will show up. That means you can't use a magic mode line at
 the top. Instead, try giving your input files a unique extension and
-then use ~auto-mode-alist~. If anyone can suggest a nice recipe for
+then use `auto-mode-alist`. If anyone can suggest a nice recipe for
 using mutilple major modes for editing Kallychore files (text mode or
 markdown mode for text regions, and shell-script-mode for code cells)
 that would be... swell.

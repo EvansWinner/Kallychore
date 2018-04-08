@@ -2,7 +2,7 @@
 
 ## This is updated automatically by git pre-commit hook to be the
 ## current git revision number.
-version="28"
+version="29"
 
 ### Defaults
 ## Delimiting strings cfor code cells and output regions.
@@ -120,11 +120,11 @@ BEGIN {
     print cellendstr;
     print textendstr;
     # print all the output
-    if (1 in a) print outputstartstr;
+    print outputstartstr;
     for (i=1;i<code;i++) {
 	print a[i];
     }
-    if (1 in a) print outputendstr;
+    print outputendstr;
 
     code = 0;			# reset for next cell
     text = 0;
