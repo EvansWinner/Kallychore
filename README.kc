@@ -20,19 +20,33 @@ command line flag, "-m", which produces output better suited for use
 in Github's Markdown or Pandoc's "backtick_code_blocks" extension.
 
 This file's source is README.kc. Once it is processed with Kallychore,
-it becomes README.md:
+it becomes README.md (using the `-m` flag):
 
-    $ kallychore -m README.kc > README.md
+    $ kallychore -m README.kc | bash > README.md
 
-It is a regular text file with shell commands surrounded with
-tripple-curly-braces: \{\{\{ and \}\}\} each on a line by itself. Take
-a look at README.kc to see how it works. When the input file is
-processed with Kallychore, lines which are normal text should be
-simply echoed to standard output, but lines which are surrounded with
-that tag will be echoed in a cute little ASCII art box, and then
-executed by bash, their output going to standard output just like the
-running text. For example, the next line is a call to 'wc' to list the
-number of characters in the script file 'kallychore'. 
+(The raw output of Kallychore is a script that can be executed by
+`bash`. Originally, Kallychore piped its output to `bash`
+automatically, but now it requires that you do the pipe on the command
+line. This is for two major reasons, first because it makes Kallychore
+much easier to debug, because you can always look at that output
+easily before piping it to `bash`, and second, because you can then
+source the resulting file into your current `bash` environment, making
+it easier to debug your documents, and also making Kallychore a kind
+of literate programming tool. You can do that by using process
+substitution, like:
+
+    $ source <(kallychore file.kc) > file.txt
+
+So the source for this README is a regular text file with shell
+commands surrounded with tripple-curly-braces: \{\{\{ and \}\}\} each
+on a line by itself. Take a look at README.kc to see how it
+works. When the input file is processed with Kallychore, lines which
+are normal text should be simply echoed to standard output, but lines
+which are surrounded with that tag will be echoed in a cute little
+ASCII art box, and then executed by bash, their output going to
+standard output just like the running text. For example, the next line
+is a call to 'wc' to list the number of characters in the script file
+'kallychore'.
 
 {{{
 wc -m kallychore
