@@ -2,7 +2,7 @@
 
 ## This is updated automatically by git pre-commit hook to be the
 ## current git revision number.
-version="30"
+version="31"
 
 ### Defaults
 ## Delimiting strings cfor code cells and output regions.
@@ -13,7 +13,7 @@ outputstartstr=""
 outputendstr=""
  
 ## Help
-function kallyc_help() {
+kallyc_help () {
     echo "Usage:"
     echo "    kallychore [opts] FILE [FILE...]  Process FILE(s) with Kallychore."
     echo "    kallychore -h                     Display this help text."
@@ -84,11 +84,11 @@ BEGIN {
     code = 0;
     text = 0;
     # Functions we want available to the user
-    print "function make_recipe {"
+    print "make_recipe () {"
     print "echo The Makefile command line was:"
     print " make -B --just-print --no-print-directory $1"
     print "}"
-    print "function spaces {"
+    print "spaces () {"
     print " sed 's/^/    /g'"
     print "}"
 }
