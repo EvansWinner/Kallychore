@@ -183,10 +183,9 @@ make_recipe README.md
 There are no comment characters in Kallychore documents, so whatever
 you write will show up. That means you can't use a magic mode line at
 the top. Instead, try giving your input files a unique extension and
-then use `auto-mode-alist`. If anyone can suggest a nice recipe for
-using mutilple major modes for editing Kallychore files (text mode or
-markdown mode for text regions, and shell-script-mode for code cells)
-that would be... swell.
+then use `auto-mode-alist`. There is a little polymode included in the
+repository for editing plain text / shell scripts in Emacs. It
+requires polymode, of course.
 
 
 ## Use

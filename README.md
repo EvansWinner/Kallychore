@@ -20,19 +20,33 @@ command line flag, "-m", which produces output better suited for use
 in Github's Markdown or Pandoc's "backtick_code_blocks" extension.
 
 This file's source is README.kc. Once it is processed with Kallychore,
-it becomes README.md:
+it becomes README.md (using the `-m` flag):
 
-    $ kallychore -m README.kc > README.md
+    $ kallychore -m README.kc | bash > README.md
 
-It is a regular text file with shell commands surrounded with
-tripple-curly-braces: \{\{\{ and \}\}\} each on a line by itself. Take
-a look at README.kc to see how it works. When the input file is
-processed with Kallychore, lines which are normal text should be
-simply echoed to standard output, but lines which are surrounded with
-that tag will be echoed in a cute little ASCII art box, and then
-executed by bash, their output going to standard output just like the
-running text. For example, the next line is a call to 'wc' to list the
-number of characters in the script file 'kallychore'. 
+(The raw output of Kallychore is a script that can be executed by
+`bash`. Originally, Kallychore piped its output to `bash`
+automatically, but now it requires that you do the pipe on the command
+line. This is for two major reasons, first because it makes Kallychore
+much easier to debug, because you can always look at that output
+easily before piping it to `bash`, and second, because you can then
+source the resulting file into your current `bash` environment, making
+it easier to debug your documents, and also making Kallychore a kind
+of literate programming tool. You can do that by using process
+substitution, like:
+
+    $ source <(kallychore file.kc) > file.txt
+
+So the source for this README is a regular text file with shell
+commands surrounded with tripple-curly-braces: \{\{\{ and \}\}\} each
+on a line by itself. Take a look at README.kc to see how it
+works. When the input file is processed with Kallychore, lines which
+are normal text should be simply echoed to standard output, but lines
+which are surrounded with that tag will be echoed in a cute little
+ASCII art box, and then executed by bash, their output going to
+standard output just like the running text. For example, the next line
+is a call to 'wc' to list the number of characters in the script file
+'kallychore'.
 
 ```bash
 #### Code Cell Start ##########
@@ -40,7 +54,7 @@ wc -m kallychore
 ###############################
 ```
 ~~~~~
-3847 kallychore
+3818 kallychore
 ~~~~~
 
 
@@ -78,28 +92,28 @@ gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'"
 ```
 ~~~~~
                                                                                
-                                                                               
-  7000 +-+------+-------+--------+-------+--------+-------+--------+-----+-+   
-       +        +       +        +       +        +       +        +       *   
-       |                                                'data.dat'    *    |   
-  6000 +-+                                                               +-+   
-       |                                                                   |   
-  5000 +-+                                                               +-+   
-       |                                                                   |   
-       |                                                                   |   
-  4000 +-+                                                               +-+   
-       |                                 *                                 |   
-       |                                                                   |   
-  3000 +-+                                                               +-+   
-       |                                                                   |   
-       |                                                                   |   
-  2000 +-+                                                               +-+   
-       |                                                                   |   
-  1000 +-+                                                               +-+   
-       |                                                  *                |   
-       *        +       *        +       +        +       +        +       +   
-     0 +-+------+-------+--------+-------+--------+-------+--------+-----+-+   
-       1       1.5      2       2.5      3       3.5      4       4.5      5   
+  18000 +------------------------------------------------------------------+   
+        |       +        +       +        +       +       *        +       |   
+  16000 |-+                                             'data.dat'    *  +-|   
+        |                                                                  |   
+  14000 |-+                                                              +-|   
+        |                                                                  |   
+        |                                                                  |   
+  12000 |-+                                                              +-|   
+        |                                                                  |   
+  10000 |-+                                                              +-|   
+        |                                                                  |   
+   8000 |-+                                                              +-|   
+        |                                                                  |   
+   6000 |-+                                                              +-|   
+        |                                                                  |   
+        |                                                                  |   
+   4000 |-+                                                              +-|   
+        |                                                                  |   
+   2000 |-+                                                              +-|   
+        |       +        +       +        +       +       +        +       |   
+      0 +------------------------------------------------------------------+   
+        1      1.5       2      2.5       3      3.5      4       4.5      5   
                                                                                
 ~~~~~
 
@@ -225,18 +239,18 @@ whatver SYSTEM wc awk bash gnuplot cat cc whatver \
 ###############################
 ```
 ~~~~~
-Linux 4.13.0-37-generic #42-Ubuntu SMP Wed Mar 7 14:13:23 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
-wc (GNU coreutils) 8.26
-GNU Awk 4.1.4, API: 1.1 (GNU MPFR 3.1.6, GNU MP 6.1.2)
-GNU bash, version 4.4.12(1)-release (x86_64-pc-linux-gnu)
-gnuplot 5.0 patchlevel 7
-cat (GNU coreutils) 8.26
-cc (Ubuntu 7.2.0-8ubuntu3.2) 7.2.0
+Linux 5.0.0-20-generic #21-Ubuntu SMP Mon Jun 24 09:32:09 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+wc (GNU coreutils) 8.30
+GNU Awk 4.2.1, API: 2.0 (GNU MPFR 4.0.2, GNU MP 6.1.2)
+GNU bash, version 5.0.3(1)-release (x86_64-pc-linux-gnu)
+gnuplot 5.2 patchlevel 6
+cat (GNU coreutils) 8.30
+cc (Ubuntu 8.3.0-6ubuntu1) 8.3.0
 whatver version (git revision) 19
-tail (GNU coreutils) 8.26
-sed (GNU sed) 4.4
-head (GNU coreutils) 8.26
-kallychore version (git revision) 26
+tail (GNU coreutils) 8.30
+sed (GNU sed) 4.7
+head (GNU coreutils) 8.30
+kallychore version (git revision) 31
 ~~~~~
 
 ```bash
@@ -256,10 +270,9 @@ rm data.dat his*
 There are no comment characters in Kallychore documents, so whatever
 you write will show up. That means you can't use a magic mode line at
 the top. Instead, try giving your input files a unique extension and
-then use `auto-mode-alist`. If anyone can suggest a nice recipe for
-using mutilple major modes for editing Kallychore files (text mode or
-markdown mode for text regions, and shell-script-mode for code cells)
-that would be... swell.
+then use `auto-mode-alist`. There is a little polymode included in the
+repository for editing plain text / shell scripts in Emacs. It
+requires polymode, of course.
 
 
 ## Use
