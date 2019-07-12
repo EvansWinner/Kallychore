@@ -1,13 +1,32 @@
+make_recipe () {
+echo The Makefile command line was:
+ make -B --just-print --no-print-directory $1
+}
+spaces () {
+ sed 's/^/    /g'
+}
+cat <<'kallychoreistehbombzers'
+kallychoreistehbombzers
+cat <<'kallychoreistehbombzers'
 .--- Code cell start ----------
 :  echo "Hi. This is a test."
 `------------------------------
-Hi. This is a test.
+kallychoreistehbombzers
+
+echo "Hi. This is a test."
+
+cat <<'kallychoreistehbombzers'
 
 ~README.in~ is the main test file for Kallychore, but I want to be
 able to test a few more things. The file starts and ends with a code
 cell.
 
+kallychoreistehbombzers
+cat <<'kallychoreistehbombzers'
 .--- Code cell start ----------
 :  echo "Ta-da!"
 `------------------------------
-Ta-da!
+kallychoreistehbombzers
+
+echo "Ta-da!"
+

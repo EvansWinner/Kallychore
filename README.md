@@ -1,3 +1,11 @@
+make_recipe () {
+echo The Makefile command line was:
+ make -B --just-print --no-print-directory $1
+}
+spaces () {
+ sed 's/^/    /g'
+}
+cat <<'kallychoreistehbombzers'
 # KALLYCHORE --- Gutter-punk plain-text code notebook processor
 
 ## Introduction
@@ -12,19 +20,27 @@ consisting of an embedded awk program) which turns plain text mixed
 with shell commands into plain text mixed with shell commands AND
 their output. Cool, no?
 
-This is an example of a file that uses Kallychore for
-processing. Although Kallychore is intended for plain text use, there
-is nothing to say you can't write your plain text in Markdown and then
-post-process it with something like Pandoc. In fact, Kallychore has a
-command line flag, "-m", which produces output better suited for use
-in Github's Markdown or Pandoc's "backtick_code_blocks" extension.
+(Note that this is not really like what you get with a dynamic
+language, where you can evaluate things on the fly in your editor. As,
+say, Rstudio is to an interpreted language, so is Kallychore to a
+compiler. You write your document with code blocks, and then you
+process the whole thing in one go with Kallychore.)
+
+If the file you are reading now is README.md, then this is an example
+of a file that was generated using Kallychore from a plain text source
+file. Although Kallychore is intended for plain text use, there is
+nothing to say you can't write your plain text in Markdown and then
+post-process it with something like Pandoc, which is what was done
+here. In fact, Kallychore has a command line flag, "-m", which
+produces output better suited for use in Github's Markdown or Pandoc's
+"backtick_code_blocks" extension.
 
 This file's source is README.kc. Once it is processed with Kallychore,
 it becomes README.md (using the `-m` flag):
 
     $ kallychore -m README.kc | bash > README.md
 
-(The raw output of Kallychore is a script that can be executed by
+The raw output of Kallychore is a script that can be executed by
 `bash`. Originally, Kallychore piped its output to `bash`
 automatically, but now it requires that you do the pipe on the command
 line. This is for two major reasons, first because it makes Kallychore
@@ -48,14 +64,18 @@ standard output just like the running text. For example, the next line
 is a call to 'wc' to list the number of characters in the script file
 'kallychore'.
 
+kallychoreistehbombzers
+cat <<'kallychoreistehbombzers'
 ```bash
 #### Code Cell Start ##########
 wc -m kallychore
 ###############################
 ```
-~~~~~
-3818 kallychore
-~~~~~
+kallychoreistehbombzers
+echo ~~~~~
+wc -m kallychore
+echo ~~~~~
+cat <<'kallychoreistehbombzers'
 
 
 ## Examples
@@ -73,49 +93,35 @@ one.)
 First, lets make a data file showing the character counts of all the
 files in this directory.
 
+kallychoreistehbombzers
+cat <<'kallychoreistehbombzers'
 ```bash
 #### Code Cell Start ##########
 wc -c * | awk '{print $1}' | head -5 | awk 'BEGIN {i=1}; {print i " " $0; i++}' > data.dat
 ###############################
 ```
-~~~~~
-~~~~~
+kallychoreistehbombzers
+echo ~~~~~
+wc -c * | awk '{print $1}' | head -5 | awk 'BEGIN {i=1}; {print i " " $0; i++}' > data.dat
+echo ~~~~~
+cat <<'kallychoreistehbombzers'
 
 (Note: Since we redirected that to a file, there is no output here.)
 
 Then, I don't know; plot it, I guess:
 
+kallychoreistehbombzers
+cat <<'kallychoreistehbombzers'
 ```bash
 #### Code Cell Start ##########
 gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'"
 ###############################
 ```
-~~~~~
-                                                                               
-  18000 +------------------------------------------------------------------+   
-        |       +        +       +        +       +       *        +       |   
-  16000 |-+                                             'data.dat'    *  +-|   
-        |                                                                  |   
-  14000 |-+                                                              +-|   
-        |                                                                  |   
-        |                                                                  |   
-  12000 |-+                                                              +-|   
-        |                                                                  |   
-  10000 |-+                                                              +-|   
-        |                                                                  |   
-   8000 |-+                                                              +-|   
-        |                                                                  |   
-   6000 |-+                                                              +-|   
-        |                                                                  |   
-        |                                                                  |   
-   4000 |-+                                                              +-|   
-        |                                                                  |   
-   2000 |-+                                                              +-|   
-        |       +        +       +        +       +       +        +       |   
-      0 +------------------------------------------------------------------+   
-        1      1.5       2      2.5       3      3.5      4       4.5      5   
-                                                                               
-~~~~~
+kallychoreistehbombzers
+echo ~~~~~
+gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'"
+echo ~~~~~
+cat <<'kallychoreistehbombzers'
 
 Neet.
 
@@ -129,6 +135,8 @@ of word lengths in a file (Exercise 1-13 from ye olde K&R C book, as
 it happens). Let's just compile the code, and then run it against
 extra-tests.kc:
  
+kallychoreistehbombzers
+cat <<'kallychoreistehbombzers'
 ```bash
 #### Code Cell Start ##########
 cc -x c -o hist.exe - <<'thisHereIsAHereDoc'
@@ -191,31 +199,68 @@ thisHereIsAHereDoc
 cat extra-tests.kc | ./hist.exe
 ###############################
 ```
-~~~~~
+kallychoreistehbombzers
+echo ~~~~~
+cc -x c -o hist.exe - <<'thisHereIsAHereDoc'
+#include <stdio.h>
 
-    -- NUMBER OF WORDS OF GIVEN LENGTH IN INPUT FILE (MAX 50) --
-                          |10       |20       |30       |40       |>50
-   1 character:  ***
-   2 characters: ****
-   3 characters: *****
-   4 characters: **********
-   5 characters: ***************
-   6 characters: *
-   7 characters: **
-   8 characters: *
-   9 characters: *
-  10 characters: 
-  11 characters: 
-  12 characters: **
-  13 characters: 
-  14 characters: 
-  15 characters: 
-  16 characters: 
-  17 characters: 
-  18 characters: 
-  19 characters: 
->=20 characters: 
-~~~~~
+#define IN 1
+#define OUT 0
+#define MAX_WORD_LENGTH 20
+
+void make_it(int n) {
+  int i;
+  if (n > 50) n = 50;
+  for (i = 0; i < n; ++i)
+    printf("*");
+  return;
+}
+
+int main() {
+  int c, i, last = OUT, count = 0;
+  int words[MAX_WORD_LENGTH];		/* histogram array */
+  for (i = 0; i < MAX_WORD_LENGTH; ++i)	/* initialize it */
+    words[i] = 0;
+  /* Populate the array */
+  while ((c = getchar()) != EOF) {
+    if ((c == ' ') || (c == '\t') || (c == '\n')) {
+      if (last == IN)
+	if (count <= MAX_WORD_LENGTH) words[count] = ++words[count];
+        else words[MAX_WORD_LENGTH - 1] = ++words[MAX_WORD_LENGTH - 1];
+      count = 0;
+    }
+    else {
+      last = IN;
+      count = ++count;
+    }
+  }
+
+  if (last == IN)
+    if (count <= MAX_WORD_LENGTH) words[count] = ++words[count];
+    else words[MAX_WORD_LENGTH - 1] = ++words[MAX_WORD_LENGTH - 1];
+
+  /* write the histogram */
+  printf("\n    -- NUMBER OF WORDS OF GIVEN LENGTH IN INPUT FILE (MAX 50) --\n");
+  printf("                          |10       |20       |30       |40       |>50\n");
+  for (i = 0; i < MAX_WORD_LENGTH; ++i) {
+    if (i == (MAX_WORD_LENGTH - 1)) printf(">=");
+    else printf("  ");
+    /* if (i < MAX_WORD_LENGTH) printf(" "); */
+    if (i < 9) printf(" ");
+    printf("%d ", i + 1);
+    printf("character");
+    if (i == 0) printf(":  ");
+    else printf("s: ");
+    /* do it */
+    make_it(words[i]);
+    printf("\n");
+  }
+  return 0;
+}
+thisHereIsAHereDoc
+cat extra-tests.kc | ./hist.exe
+echo ~~~~~
+cat <<'kallychoreistehbombzers'
 
 No, doesn't look too bad after all. I think you'll all survive.
 
@@ -232,37 +277,33 @@ programs you used. If so, then try
 [whatver](https://github.com/EvansWinner/whatver), which is a tiny
 python 3 script that lets you do this:
 
+kallychoreistehbombzers
+cat <<'kallychoreistehbombzers'
 ```bash
 #### Code Cell Start ##########
 whatver SYSTEM wc awk bash gnuplot cat cc whatver \
         tail sed head kallychore 
 ###############################
 ```
-~~~~~
-Linux 5.0.0-20-generic #21-Ubuntu SMP Mon Jun 24 09:32:09 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
-wc (GNU coreutils) 8.30
-GNU Awk 4.2.1, API: 2.0 (GNU MPFR 4.0.2, GNU MP 6.1.2)
-GNU bash, version 5.0.3(1)-release (x86_64-pc-linux-gnu)
-gnuplot 5.2 patchlevel 6
-cat (GNU coreutils) 8.30
-cc (Ubuntu 8.3.0-6ubuntu1) 8.3.0
-whatver version (git revision) 19
-tail (GNU coreutils) 8.30
-sed (GNU sed) 4.7
-head (GNU coreutils) 8.30
-kallychore version (git revision) 31
-~~~~~
+kallychoreistehbombzers
+echo ~~~~~
+whatver SYSTEM wc awk bash gnuplot cat cc whatver \
+        tail sed head kallychore 
+echo ~~~~~
+cat <<'kallychoreistehbombzers'
 
+kallychoreistehbombzers
+cat <<'kallychoreistehbombzers'
 ```bash
 #### Code Cell Start ##########
 make_recipe README.md
 ###############################
 ```
-~~~~~
-The Makefile command line was:
-./kallychore -m README.kc > README.md
-rm data.dat his*
-~~~~~
+kallychoreistehbombzers
+echo ~~~~~
+make_recipe README.md
+echo ~~~~~
+cat <<'kallychoreistehbombzers'
 
 
 ## Emacs
@@ -270,9 +311,10 @@ rm data.dat his*
 There are no comment characters in Kallychore documents, so whatever
 you write will show up. That means you can't use a magic mode line at
 the top. Instead, try giving your input files a unique extension and
-then use `auto-mode-alist`. There is a little polymode included in the
-repository for editing plain text / shell scripts in Emacs. It
-requires polymode, of course.
+then use `auto-mode-alist`. If anyone can suggest a nice recipe for
+using mutilple major modes for editing Kallychore files (text mode or
+markdown mode for text regions, and shell-script-mode for code cells)
+that would be... swell.
 
 
 ## Use
@@ -311,3 +353,4 @@ I'll think about fixing it.
 
 [1] Kallychore is an itty-bitty tiny moon of Jupyter.
     Get it?
+kallychoreistehbombzers
