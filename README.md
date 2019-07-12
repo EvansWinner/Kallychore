@@ -1,11 +1,3 @@
-make_recipe () {
-echo The Makefile command line was:
- make -B --just-print --no-print-directory $1
-}
-spaces () {
- sed 's/^/    /g'
-}
-cat <<'kallychoreistehbombzers'
 # KALLYCHORE --- Gutter-punk plain-text code notebook processor
 
 ## Introduction
@@ -64,18 +56,14 @@ standard output just like the running text. For example, the next line
 is a call to 'wc' to list the number of characters in the script file
 'kallychore'.
 
-kallychoreistehbombzers
-cat <<'kallychoreistehbombzers'
 ```bash
 #### Code Cell Start ##########
 wc -m kallychore
 ###############################
 ```
-kallychoreistehbombzers
-echo ~~~~~
-wc -m kallychore
-echo ~~~~~
-cat <<'kallychoreistehbombzers'
+~~~~~
+3818 kallychore
+~~~~~
 
 
 ## Examples
@@ -93,35 +81,49 @@ one.)
 First, lets make a data file showing the character counts of all the
 files in this directory.
 
-kallychoreistehbombzers
-cat <<'kallychoreistehbombzers'
 ```bash
 #### Code Cell Start ##########
 wc -c * | awk '{print $1}' | head -5 | awk 'BEGIN {i=1}; {print i " " $0; i++}' > data.dat
 ###############################
 ```
-kallychoreistehbombzers
-echo ~~~~~
-wc -c * | awk '{print $1}' | head -5 | awk 'BEGIN {i=1}; {print i " " $0; i++}' > data.dat
-echo ~~~~~
-cat <<'kallychoreistehbombzers'
+~~~~~
+~~~~~
 
 (Note: Since we redirected that to a file, there is no output here.)
 
 Then, I don't know; plot it, I guess:
 
-kallychoreistehbombzers
-cat <<'kallychoreistehbombzers'
 ```bash
 #### Code Cell Start ##########
 gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'"
 ###############################
 ```
-kallychoreistehbombzers
-echo ~~~~~
-gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'"
-echo ~~~~~
-cat <<'kallychoreistehbombzers'
+~~~~~
+                                                                               
+  4000 +-------------------------------------------------------------------+   
+       |        +       +        +       *        +       +        +       |   
+  3500 |-+                                              'data.dat'    *  +-|   
+       |                                                                   |   
+       |                                                                   |   
+  3000 |-+                                                               +-|   
+       |                                                                   |   
+  2500 |-+                                                               +-|   
+       |                                                                   |   
+       |                                                                   |   
+  2000 |-+                                                               +-|   
+       |                                                                   |   
+  1500 |-+                                                               +-|   
+       |                                                                   |   
+       |                                                                   |   
+  1000 |-+                                                               +-|   
+       |                                                                   |   
+   500 |-+                                                *              +-|   
+       |                *                                                  |   
+       |        +       +        +       +        +       +        +       |   
+     0 +-------------------------------------------------------------------+   
+       1       1.5      2       2.5      3       3.5      4       4.5      5   
+                                                                               
+~~~~~
 
 Neet.
 
@@ -135,8 +137,6 @@ of word lengths in a file (Exercise 1-13 from ye olde K&R C book, as
 it happens). Let's just compile the code, and then run it against
 extra-tests.kc:
  
-kallychoreistehbombzers
-cat <<'kallychoreistehbombzers'
 ```bash
 #### Code Cell Start ##########
 cc -x c -o hist.exe - <<'thisHereIsAHereDoc'
@@ -199,68 +199,31 @@ thisHereIsAHereDoc
 cat extra-tests.kc | ./hist.exe
 ###############################
 ```
-kallychoreistehbombzers
-echo ~~~~~
-cc -x c -o hist.exe - <<'thisHereIsAHereDoc'
-#include <stdio.h>
+~~~~~
 
-#define IN 1
-#define OUT 0
-#define MAX_WORD_LENGTH 20
-
-void make_it(int n) {
-  int i;
-  if (n > 50) n = 50;
-  for (i = 0; i < n; ++i)
-    printf("*");
-  return;
-}
-
-int main() {
-  int c, i, last = OUT, count = 0;
-  int words[MAX_WORD_LENGTH];		/* histogram array */
-  for (i = 0; i < MAX_WORD_LENGTH; ++i)	/* initialize it */
-    words[i] = 0;
-  /* Populate the array */
-  while ((c = getchar()) != EOF) {
-    if ((c == ' ') || (c == '\t') || (c == '\n')) {
-      if (last == IN)
-	if (count <= MAX_WORD_LENGTH) words[count] = ++words[count];
-        else words[MAX_WORD_LENGTH - 1] = ++words[MAX_WORD_LENGTH - 1];
-      count = 0;
-    }
-    else {
-      last = IN;
-      count = ++count;
-    }
-  }
-
-  if (last == IN)
-    if (count <= MAX_WORD_LENGTH) words[count] = ++words[count];
-    else words[MAX_WORD_LENGTH - 1] = ++words[MAX_WORD_LENGTH - 1];
-
-  /* write the histogram */
-  printf("\n    -- NUMBER OF WORDS OF GIVEN LENGTH IN INPUT FILE (MAX 50) --\n");
-  printf("                          |10       |20       |30       |40       |>50\n");
-  for (i = 0; i < MAX_WORD_LENGTH; ++i) {
-    if (i == (MAX_WORD_LENGTH - 1)) printf(">=");
-    else printf("  ");
-    /* if (i < MAX_WORD_LENGTH) printf(" "); */
-    if (i < 9) printf(" ");
-    printf("%d ", i + 1);
-    printf("character");
-    if (i == 0) printf(":  ");
-    else printf("s: ");
-    /* do it */
-    make_it(words[i]);
-    printf("\n");
-  }
-  return 0;
-}
-thisHereIsAHereDoc
-cat extra-tests.kc | ./hist.exe
-echo ~~~~~
-cat <<'kallychoreistehbombzers'
+    -- NUMBER OF WORDS OF GIVEN LENGTH IN INPUT FILE (MAX 50) --
+                          |10       |20       |30       |40       |>50
+   1 character:  ***
+   2 characters: ****
+   3 characters: *****
+   4 characters: **********
+   5 characters: ***************
+   6 characters: *
+   7 characters: **
+   8 characters: *
+   9 characters: *
+  10 characters: 
+  11 characters: 
+  12 characters: **
+  13 characters: 
+  14 characters: 
+  15 characters: 
+  16 characters: 
+  17 characters: 
+  18 characters: 
+  19 characters: 
+>=20 characters: 
+~~~~~
 
 No, doesn't look too bad after all. I think you'll all survive.
 
@@ -277,33 +240,39 @@ programs you used. If so, then try
 [whatver](https://github.com/EvansWinner/whatver), which is a tiny
 python 3 script that lets you do this:
 
-kallychoreistehbombzers
-cat <<'kallychoreistehbombzers'
 ```bash
 #### Code Cell Start ##########
 whatver SYSTEM wc awk bash gnuplot cat cc whatver \
         tail sed head kallychore 
 ###############################
 ```
-kallychoreistehbombzers
-echo ~~~~~
-whatver SYSTEM wc awk bash gnuplot cat cc whatver \
-        tail sed head kallychore 
-echo ~~~~~
-cat <<'kallychoreistehbombzers'
+~~~~~
+MINGW64_NT-10.0-18362 3.0.7-338.x86_64 2019-05-24 10:50 UTC x86_64 unknown unknown Msys
+wc (GNU coreutils) 8.31
+GNU Awk 5.0.0, API: 2.0 (GNU MPFR 4.0.2, GNU MP 6.1.2)
+GNU bash, version 4.4.23(1)-release (x86_64-pc-msys)
+gnuplot 5.2 patchlevel 7
+cat (GNU coreutils) 8.31
+cc (Rev2, Built by MSYS2 project) 8.3.0
+'whatver' is not recognized as an internal or external command,
+operable program or batch file.
+tail (GNU coreutils) 8.31
+sed (GNU sed) 4.7
+head (GNU coreutils) 8.31
+'kallychore' is not recognized as an internal or external command,
+operable program or batch file.
+~~~~~
 
-kallychoreistehbombzers
-cat <<'kallychoreistehbombzers'
 ```bash
 #### Code Cell Start ##########
 make_recipe README.md
 ###############################
 ```
-kallychoreistehbombzers
-echo ~~~~~
-make_recipe README.md
-echo ~~~~~
-cat <<'kallychoreistehbombzers'
+~~~~~
+The Makefile command line was:
+./kallychore -m README.kc | bash > README.md
+rm data.dat his*
+~~~~~
 
 
 ## Emacs
@@ -353,4 +322,3 @@ I'll think about fixing it.
 
 [1] Kallychore is an itty-bitty tiny moon of Jupyter.
     Get it?
-kallychoreistehbombzers

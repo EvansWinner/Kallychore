@@ -15,11 +15,11 @@ test: clean extra-tests.txt README.md
 
 
 README.md: README.kc
-	./kallychore -m README.kc > README.md
+	./kallychore -m README.kc | bash > README.md
 	rm data.dat his*
 
 extra-tests.txt: extra-tests.kc
-	./kallychore extra-tests.kc > extra-tests.txt
+	./kallychore extra-tests.kc | bash > extra-tests.txt
 
 clean:
 	rm -f his* data.dat README.md extra-tests.txt
