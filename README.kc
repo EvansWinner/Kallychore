@@ -12,19 +12,27 @@ consisting of an embedded awk program) which turns plain text mixed
 with shell commands into plain text mixed with shell commands AND
 their output. Cool, no?
 
-This is an example of a file that uses Kallychore for
-processing. Although Kallychore is intended for plain text use, there
-is nothing to say you can't write your plain text in Markdown and then
-post-process it with something like Pandoc. In fact, Kallychore has a
-command line flag, "-m", which produces output better suited for use
-in Github's Markdown or Pandoc's "backtick_code_blocks" extension.
+(Note that this is not really like what you get with a dynamic
+language, where you can evaluate things on the fly in your editor. As,
+say, Rstudio is to an interpreted language, so is Kallychore to a
+compiler. You write your document with code blocks, and then you
+process the whole thing in one go with Kallychore.)
+
+If the file you are reading now is README.md, then this is an example
+of a file that was generated using Kallychore from a plain text source
+file. Although Kallychore is intended for plain text use, there is
+nothing to say you can't write your plain text in Markdown and then
+post-process it with something like Pandoc, which is what was done
+here. In fact, Kallychore has a command line flag, "-m", which
+produces output better suited for use in Github's Markdown or Pandoc's
+"backtick_code_blocks" extension.
 
 This file's source is README.kc. Once it is processed with Kallychore,
 it becomes README.md (using the `-m` flag):
 
     $ kallychore -m README.kc | bash > README.md
 
-(The raw output of Kallychore is a script that can be executed by
+The raw output of Kallychore is a script that can be executed by
 `bash`. Originally, Kallychore piped its output to `bash`
 automatically, but now it requires that you do the pipe on the command
 line. This is for two major reasons, first because it makes Kallychore
@@ -183,9 +191,10 @@ make_recipe README.md
 There are no comment characters in Kallychore documents, so whatever
 you write will show up. That means you can't use a magic mode line at
 the top. Instead, try giving your input files a unique extension and
-then use `auto-mode-alist`. There is a little polymode included in the
-repository for editing plain text / shell scripts in Emacs. It
-requires polymode, of course.
+then use `auto-mode-alist`. If anyone can suggest a nice recipe for
+using mutilple major modes for editing Kallychore files (text mode or
+markdown mode for text regions, and shell-script-mode for code cells)
+that would be... swell.
 
 
 ## Use
