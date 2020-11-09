@@ -12,7 +12,9 @@ all:
 
 
 test: clean extra-tests.txt README.md
-
+     
+check: 
+	shellcheck -eSC2002 kallychore
 
 README.md: README.kc
 	./kallychore -m README.kc | bash > README.md

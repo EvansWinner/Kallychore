@@ -157,8 +157,8 @@ EOF
 )
     
 for arg; do
-    cat $arg |
-	awk -v cellstartstr="${cellstartstr}" \
+    cat "$arg" |
+	 awk -v cellstartstr="${cellstartstr}" \
 	    -v cellendstr="${cellendstr}"     \
 	    -v outputstartstr="${outputstartstr}"     \
 	    -v outputendstr="${outputendstr}"     \
