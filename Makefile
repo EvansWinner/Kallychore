@@ -5,7 +5,7 @@ all:
 	@echo "Use 'make test' to built README.md and extra-tests.txt."
 	@echo ""
 	@echo "Use 'make install' to send a copy of kallychore to"
-	@echo "/usr/local/bin"
+	@echo "${PREFIX}/bin"
 	@echo ""
 	@echo "That's about it, really."
 
@@ -27,4 +27,4 @@ clean:
 	rm -f his* data.dat README.md extra-tests.txt
 
 install:
-	install -t /usr/local/bin kallychore
+	install -t ${PREFIX}/bin kallychore
