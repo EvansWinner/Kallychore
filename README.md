@@ -6,7 +6,7 @@ Kallychore is an "active code" processor for plain text and `bash`,
 sort of like like Rmarkdown in Rstudio for Markdown and R code, or
 `org-mode` with `org-babel`. It's point is to scratch its author's
 itch to have something like Rmarkdown for the `bash` command line
-which will allow for something like the "reproducable research" style
+which will allow for something like the "reproducible research" style
 of creating documents. In any case, it is a bash shell script (mainly
 consisting of an embedded awk program) which turns plain text mixed
 with shell commands into plain text mixed with shell commands AND
@@ -62,7 +62,7 @@ wc -m kallychore
 ###############################
 ```
 ~~~~~
-3818 kallychore
+3821 kallychore
 ~~~~~
 
 
@@ -100,25 +100,25 @@ gnuplot -e "set terminal dumb; plot 'data.dat' pt '*'"
 ```
 ~~~~~
                                                                                
-  4000 +-------------------------------------------------------------------+   
-       |        +       +        +       *        +       +        +       |   
-  3500 |-+                                              'data.dat'    *  +-|   
+  8000 +-------------------------------------------------------------------+   
+       |        +       *        +       +        +       +        +       |   
+  7000 |-+                                              'data.dat'    *  +-|   
        |                                                                   |   
        |                                                                   |   
+  6000 |-+                                                               +-|   
+       |                                                                   |   
+  5000 |-+                                                               +-|   
+       |                                                                   |   
+       |                                                                   |   
+  4000 |-+                                                               +-|   
+       |                                 *                                 |   
   3000 |-+                                                               +-|   
-       |                                                                   |   
-  2500 |-+                                                               +-|   
        |                                                                   |   
        |                                                                   |   
   2000 |-+                                                               +-|   
        |                                                                   |   
-  1500 |-+                                                               +-|   
-       |                                                                   |   
-       |                                                                   |   
   1000 |-+                                                               +-|   
        |                                                                   |   
-   500 |-+                                                *              +-|   
-       |                *                                                  |   
        |        +       +        +       +        +       +        +       |   
      0 +-------------------------------------------------------------------+   
        1       1.5      2       2.5      3       3.5      4       4.5      5   
@@ -247,20 +247,18 @@ whatver SYSTEM wc awk bash gnuplot cat cc whatver \
 ###############################
 ```
 ~~~~~
-MINGW64_NT-10.0-18362 3.0.7-338.x86_64 2019-05-24 10:50 UTC x86_64 unknown unknown Msys
-wc (GNU coreutils) 8.31
-GNU Awk 5.0.0, API: 2.0 (GNU MPFR 4.0.2, GNU MP 6.1.2)
-GNU bash, version 4.4.23(1)-release (x86_64-pc-msys)
-gnuplot 5.2 patchlevel 7
-cat (GNU coreutils) 8.31
-cc (Rev2, Built by MSYS2 project) 8.3.0
-'whatver' is not recognized as an internal or external command,
-operable program or batch file.
-tail (GNU coreutils) 8.31
-sed (GNU sed) 4.7
-head (GNU coreutils) 8.31
-'kallychore' is not recognized as an internal or external command,
-operable program or batch file.
+Linux 6.12.18_1 #1 SMP PREEMPT_DYNAMIC Sat Mar  8 17:13:39 UTC 2025 x86_64 unknown unknown GNU/Linux
+wc (GNU coreutils) 9.4
+GNU Awk 5.3.0, API 4.0
+GNU bash, version 5.2.32(1)-release (x86_64-unknown-linux-musl)
+gnuplot 6.0 patchlevel 3
+cat (GNU coreutils) 9.4
+cc (GCC) 14.2.1 20250405
+whatver version (git revision) 19
+tail (GNU coreutils) 9.4
+sed (GNU sed) 4.9
+head (GNU coreutils) 9.4
+kallychore version (git revision) 31
 ~~~~~
 
 ```bash
